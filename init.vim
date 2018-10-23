@@ -20,8 +20,6 @@ Plug 'chr4/nginx.vim'
 
 call plug#end() 
 
-" Key mapping for vim-easy-align
-
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
