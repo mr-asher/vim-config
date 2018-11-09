@@ -1,7 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'tpope/vim-sensible'
-Plug 'junegunn/vim-easy-align'
 Plug 'Shougo/unite.vim'
 Plug 'sbdchd/neoformat'
 Plug 'w0rp/ale'
@@ -10,6 +9,7 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mxw/vim-jsx'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer'}
+Plug 'Galooshi/vim-import-js'
 
 " Django plugins
 Plug 'tweekmonster/django-plus.vim'
@@ -18,17 +18,20 @@ Plug 'python-mode/python-mode', {'branch': 'develop'}
 "Nginx plugin
 Plug 'chr4/nginx.vim'
 
+" Zen Coding
+Plug 'mattn/emmet-vim'
+Plug 'mattn/webapi-vim'
+
+" Coding Snippets
+Plug 'epilande/vim-react-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 call plug#end() 
 
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
 " Run prettier on save
-autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
-autocmd BufWritePre,TextChanged,InsertLeave *.jsx Neoformat
+autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.jsx Neoformat
 
 " Colour settings
 set t_Co=256
@@ -52,3 +55,8 @@ nnoremap ; :
 
 " No tabs thanks. They're gross
 set tabstop=4 shiftwidth=4 expandtab
+
+" Settings for UltiSnips
+let g:UltiSnipsExpandTrigger = "<c-l>"
+let g:UltiSnipsJumpForwardTrigger = "<c-b>"
+let g:UltiSnipsJumpBackwardsTrigger = "<c-z>"
