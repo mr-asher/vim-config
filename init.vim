@@ -1,15 +1,17 @@
+
+let g:ale_completion_enabled = 1
+
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'tpope/vim-sensible'
-Plug 'Shougo/unite.vim'
-Plug 'sbdchd/neoformat'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'srcery-colors/srcery-vim'
-Plug 'itchyny/lightline.vim'
-Plug 'mxw/vim-jsx'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer'}
 Plug 'Galooshi/vim-import-js'
+
+" Airline
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
 
 " Django plugins
 Plug 'tweekmonster/django-plus.vim'
@@ -27,11 +29,19 @@ Plug 'epilande/vim-react-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-call plug#end() 
+call plug#end()
 
 " Run prettier on save
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.jsx Neoformat
+
+" Javascript Plugins
+
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'skywind3000/asyncrun.vim'
+
+call plug#end()
 
 " Colour settings
 set t_Co=256
@@ -60,3 +70,34 @@ set tabstop=4 shiftwidth=4 expandtab
 let g:UltiSnipsExpandTrigger = "<c-l>"
 let g:UltiSnipsJumpForwardTrigger = "<c-b>"
 let g:UltiSnipsJumpBackwardsTrigger = "<c-z>"
+
+" Settings for Ale
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['prospector', 'isort'],
+\	'javascript':['prettier', 'eslint'],
+\	'css':['prettier'],
+\	'jsx':['prettier'],
+\   'scss':['prettier']
+\}
+
+let g:ale_fix_on_save = 1
+
+" Settings for javascript Linter
+" autocmd BufWritePost *.js AsyncRun -post=checktime ./node_mudles/.bin/eslint -fix %
+
+" Maintain undo history between sessions
+set undofile
+
+" Airline Settings
+let g:airline#extensions#tabline#enabled = 1
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
