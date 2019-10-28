@@ -1,28 +1,27 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'  " file list
-Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
-Plug 'vim-airline/vim-airline'  " make statusline awesome
-Plug 'vim-airline/vim-airline-themes'  " themes for statusline 
-Plug 'jonathanfilip/vim-lucius'  " nice white colortheme
-Plug 'davidhalter/jedi-vim'   " jedi for python
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'  "to highlight files in nerdtree
-Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
-Plug 'kien/ctrlp.vim'  " fuzzy search files
-Plug 'tweekmonster/impsort.vim'  " color and sort imports
-Plug 'wsdjeg/FlyGrep.vim'  " awesome grep on the fly
-Plug 'mxw/vim-jsx' " jsx highlight
-Plug 'w0rp/ale'  " python linters
-Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
-Plug 'tpope/vim-commentary'  "comment-out by gc
-Plug 'roxma/nvim-yarp'  " dependency of ncm2
-Plug 'ncm2/ncm2'  " awesome autocomplete plugin
-Plug 'HansPinckaers/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
-Plug 'ncm2/ncm2-bufword'  " buffer keyword completion
-Plug 'ncm2/ncm2-path'  " filepath completion
-Plug 'jparise/vim-graphql'  " graphql syntax highlighting
-Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }}  " markdown preview
-Plug 'tweekmonster/django-plus.vim'  " Make django great again
+Plug 'scrooloose/nerdtree'                                              " file list
+Plug 'majutsushi/tagbar'                                                " show tags in a bar (functions etc) for easy browsing
+Plug 'vim-airline/vim-airline'                                          " make statusline awesome
+Plug 'vim-airline/vim-airline-themes'                                   " themes for statusline 
+Plug 'jonathanfilip/vim-lucius'                                         " nice white colortheme
+Plug 'ycm-core/YouCompleteMe'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'                          " to highlight files in nerdtree
+Plug 'Vimjas/vim-python-pep8-indent'                                    " better indenting for python
+Plug 'kien/ctrlp.vim'                                                   " fuzzy search files
+Plug 'tweekmonster/impsort.vim'                                         " color and sort imports
+Plug 'mxw/vim-jsx'                                                      " jsx highlight
+Plug 'w0rp/ale'                                                         " python linters
+Plug 'airblade/vim-gitgutter'                                           " show git changes to files in gutter
+Plug 'tpope/vim-commentary'                                             " comment-out by gc
+Plug 'jparise/vim-graphql'                                              " graphql syntax highlighting
+Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }} " markdown preview
+Plug 'tweekmonster/django-plus.vim'                                     " Make django great again
+Plug 'SirVer/ultisnips'                                                 " Snippet engine
+Plug 'honza/vim-snippets'                                               " Actual snippets to use
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }                  " Prettier for javascript projects
+Plug 'psf/black'                                                        " Black integration
+Plug 'fisadev/vim-isort'                                                " isort integration
 
 call plug#end()
 
@@ -70,15 +69,6 @@ set viminfo='20,<1000  " allow copying of more than 50 lines to other applicatio
 let g:lucius_contrast="low"
 colo lucius
 
-" ncm2 settings
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=menuone,noselect,noinsert
-"
-" make it FAST
-let ncm2#popup_delay = 5
-let ncm2#complete_length = [[1,1]]
-let g:ncm2#matcher = 'substrfuzzy'
-
 set pumheight=5
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -107,9 +97,6 @@ let maplocalleader = "`"
 let g:maplocalleader = "`"
 nnoremap <SPACE> <Nop>
 
-" FlyGrep settings
-nnoremap <leader>s :FlyGrep<cr>
-
 " ale options
 let g:ale_python_flake8_options = '--ignore=E129,E501,E302,E265,E241,E305,E402,W503'
 let g:ale_python_pylint_options = '-j 0 --max-line-length=120'
@@ -130,19 +117,6 @@ let g:ale_sign_warning = '∙'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = '0'
 let g:ale_lint_on_save = '1'
-
-" jedi options
-let g:jedi#auto_initialization = 1
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = "1"
-let g:jedi#show_call_signatures_delay = 0
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#show_call_signatures_modes = 'i'  " ni = also in normal mode
-let g:jedi#enable_speed_debugging=0
 
 " Impsort option
 hi pythonImportedObject ctermfg=127
@@ -185,3 +159,16 @@ tnoremap <Esc> <C-\><C-n>
 " Line length indicators
 autocmd FileType javascript setlocal colorcolumn=120
 autocmd FileType python setlocal colorcolumn=120
+
+" Trigger configuration for ultisnips.
+let g:UltiSnipsExpandTrigger="<c-space>"
+
+" Prettier for files without the @format doc tag
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.css,*.json,*.graphql,*.html Prettier
+
+" Run Black on save 
+autocmd BufWritePre *.py execute ':Black'
+
+" Run isort on save 
+autocmd BufWritePre *.py execute ':Isort'
