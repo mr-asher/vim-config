@@ -22,6 +22,8 @@ Plug 'honza/vim-snippets'                                               " Actual
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }                  " Prettier for javascript projects
 Plug 'psf/black'                                                        " Black integration
 Plug 'fisadev/vim-isort'                                                " isort integration
+Plug 'gcmt/taboo.vim'                                                   " Easy tab rename
+Plug 'Yggdroot/indentLine'                                              " Show code indent lines
 
 call plug#end()
 
@@ -172,3 +174,18 @@ autocmd BufWritePre *.py execute ':Black'
 
 " Run isort on save 
 autocmd BufWritePre *.py execute ':Isort'
+
+" Persist taboo names between sessions
+set sessionoptions+=tabpages,globals
+
+" IndentLines is useful, but only sometimes. Let's disable it by default
+let g:indentLine_enabled = 0
+
+" Code folding!
+set foldmethod=indent
+
+" Keep folds open when a file is opened
+augroup OpenAllFoldsOnFileOpen
+        autocmd!
+        autocmd BufRead * normal zR
+augroup END
