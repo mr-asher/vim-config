@@ -1,19 +1,21 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" if empty(glob('~/.vim/autoload/plug.vim'))
+"  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+"      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'                                          " make statusline awesome
 Plug 'vim-airline/vim-airline-themes'                                   " themes for statusline 
-Plug 'jonathanfilip/vim-lucius'                                         " nice white colortheme
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }} " markdown preview
 Plug 'neoclide/coc.nvim'                                                " Welcome to 2013
 Plug 'rafi/awesome-vim-colorschemes'                                    " More colorschemes
 Plug 'sheerun/vim-polyglot'                                             " A collection of language packs for Vim
 Plug 'brooth/far.vim'                                                   " Find and replace 
+Plug 'numirias/semshi'                                                  " Better syntax highlighting
+Plug 'janko/vim-test'
+Plug 'kien/ctrlp.vim'
 
 call plug#end()
 
@@ -25,9 +27,15 @@ let g:python3_host_prog = '/usr/bin/python3'
 let g:python_host_prog = '/usr/bin/python2'
 
 " path to ruby
-let g:ruby_host_prog = '/snap/bin/ruby'
+let g:ruby_host_prog = '/usr/bin/ruby'
 
 filetype indent on
+
+" use the terminal colors
+set termguicolors
+"
+" colorscheme options
+colorscheme onedark 
 
 set expandtab
 autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 fillchars+=vert:\
@@ -54,13 +62,10 @@ set cpoptions+=x  " stay at seach item when <esc>
 set visualbell
 set viminfo='20,<1000  " allow copying of more than 50 lines to other applications
 
-" colorscheme options
-let g:lucius_contrast="low"
-colo lucius
-
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = ""
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='onedark'
  
 " Airline settings
 " do not show error/warning section
@@ -210,3 +215,12 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+" Set ctrlp to ignore files/ folders in .gitignore
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" Set test runner for python
+let test#python#runner = 'pytest'
+let test#python#pytest#file_pattern = '\v(test[^/]+|[^/]+_test)\.py$'
+
+"Allow mouse scrolling in windows terminal
+set mouse=a

@@ -3,6 +3,7 @@
   "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "javascript", "graphql", "html", "python"],
   "prettier.eslintIntegration": true,
   "python.formatting.provider": "black",
+  "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
   "cSpell.userWords": [
     "Likert",
