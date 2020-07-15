@@ -222,5 +222,8 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let test#python#runner = 'pytest'
 let test#python#pytest#file_pattern = '\v(test[^/]+|[^/]+_test)\.py$'
 
-"Allow mouse scrolling in windows terminal
+" Allow mouse scrolling in windows terminal
 set mouse=a
+
+" Set default terminal shell to bash with .profile loaded
+set shell=bash\ -l
