@@ -1,13 +1,8 @@
 {
   "python.jediEnabled": false,
-  "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "javascript", "graphql", "html", "python"],
-  "prettier.eslintIntegration": true,
   "python.formatting.provider": "black",
+  "python.linting.flake8Args": ["--max-line-length=119"],
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
-  "cSpell.userWords": [
-    "Likert",
-    "graphql",
-    "organisation"
-  ],
+  "eslint.autoFixOnSave": true
 }

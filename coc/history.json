@@ -1,0 +1,11 @@
+{
+  "marketplace": {
+    "%2FUsers%2Fjaleslie%2FProjects%2Fgwcloud%2Fgwcloud-bilby%2Fsrc%2Freact": [
+      "coc-es",
+      "coc-eslint*"
+    ],
+    "%2FUsers%2Fjaleslie%2FProjects%2Fgwcloud%2Fgwcloud-react-host%2Fsrc": [
+      "style"
+    ]
+  }
+}

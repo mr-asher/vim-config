@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/tmp'
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/jaleslie/Projects/meertime-data-portal/src/frontend/src/components'
+let g:netrw_dirhist_6='/Users/jaleslie/Projects/meertime-data-portal/src/frontend'
+let g:netrw_dirhist_5='/Users/jaleslie/Projects/gwcloud/gwcloud-bilby/src/react/src/Components/Results/mutations'
+let g:netrw_dirhist_4='/Users/jaleslie/Projects/gwcloud/gwcloud-bilby/src/react/src/Components/Results/__generated__'
+let g:netrw_dirhist_3='/Users/jaleslie/Projects/gwcloud/gwcloud-react-host'
+let g:netrw_dirhist_2='/Users/jaleslie/Projects/gwcloud/gwcloud-bilby/src/react/src/Pages/__generated__'
+let g:netrw_dirhist_1='/Users/jaleslie/Projects/gwcloud/gwcloud-react-host/src/src/router'
+let g:netrw_dirhist_0='/Users/jaleslie/Projects/gwcloud/gwcloud-bilby'
+let g:netrw_dirhist_9='/Users/jaleslie/Projects/gwcloud/gwcloud-react-host'
+let g:netrw_dirhist_8='/Users/jaleslie/Projects/gwcloud/gwcloud-bilby/src/react/src'
