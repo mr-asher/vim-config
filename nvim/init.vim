@@ -1,9 +1,3 @@
-" if empty(glob('~/.vim/autoload/plug.vim'))
-"  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-"      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-"endif
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'                                          " make statusline awesome
@@ -22,15 +16,6 @@ Plug 'ruanyl/vim-sort-imports'
 
 call plug#end()
 
-" Sort js imports on write
-let g:import_sort_auto = 1
-
-" Phabricator adacs support
-let g:phabricator_hosts = 'phab.adacs.org.au'
-
-" Quck exit insert mode
-inoremap jk <ESC>
-
 " Better leader key
 let mapleader = " "
 
@@ -42,15 +27,20 @@ nnoremap <leader>f 1z=
 " Turn spelling on/ off
 nnoremap <leader>s :set spell!<CR>
 
-" For use with Far
-let g:far#enable_undo=1
+" Allow mouse scrolling in windows terminal
+set mouse=a
 
-" path to your python 
-let g:python3_host_prog = '/usr/bin/python3'
-let g:python_host_prog = '/usr/bin/python2'
+" Set ctrlp to ignore files/ folders in .gitignore
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-" path to ruby
-let g:ruby_host_prog = '/usr/bin/ruby'
+" Better Terminal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-a> <Esc>
+nnoremap <C-a> <Esc>
+nnoremap <C-x> <Esc>
+
+" Quck exit insert mode
+inoremap jk <ESC>
 
 filetype indent on
 
@@ -59,11 +49,6 @@ set termguicolors
 "
 " colorscheme options
 colorscheme onedark 
-
-set expandtab
-autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 fillchars+=vert:\
-autocmd FileType javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 set number  " always show current line number
 set wrapscan  " begin search from top of file when nothing is found anymore
@@ -77,8 +62,6 @@ set undoreload=100000  " maximum number lines to save for undo on a buffer reloa
 set undofile " Maintain undo history between sessions
 
 set splitright  " i prefer splitting right and below
-set splitbelow
-
 set hlsearch  " highlight search and search while typing
 set incsearch
 set cpoptions+=x  " stay at seach item when <esc>
@@ -98,23 +81,8 @@ let g:airline_section_warning = ""
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
-endif
-
-" Line length indicators
-autocmd FileType javascript setlocal colorcolumn=120
-autocmd FileType python setlocal colorcolumn=120
-
-" Easy open terminal
-nnoremap <C-t> :sp term://zsh<CR> :resize 10 <CR> A
-
-" Better Terminal mode
-tnoremap <Esc> <C-\><C-n>
-tnoremap <C-a> <Esc>
-nnoremap <C-a> <Esc>
-nnoremap <C-x> <Esc>
 
 " Coc example settings
-
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -238,13 +206,29 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+endif
 
-" Set ctrlp to ignore files/ folders in .gitignore
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" Line length indicators
+autocmd FileType javascript setlocal colorcolumn=120
+autocmd FileType python setlocal colorcolumn=120
+
+" Easy open terminal
+nnoremap <C-t> :sp term://zsh<CR> :resize 10 <CR> A
+
+" Sort js imports on write
+let g:import_sort_auto = 1
+
+" Phabricator adacs support
+let g:phabricator_hosts = 'phab.adacs.org.au'
+
+" For use with Far 
+let g:far#enable_undo=1
+
+set expandtab
+autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 fillchars+=vert:\
+autocmd FileType javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " Set test runner for python
 let test#python#runner = 'pytest'
 let test#python#pytest#file_pattern = '\v(test[^/]+|[^/]+_test)\.py$'
-
-" Allow mouse scrolling in windows terminal
-set mouse=a
